@@ -1,0 +1,46 @@
+#root {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.Search {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.Books {
+  display: grid;
+  grid-template-columns: 600px 0.8fr;
+  margin-top: 5rem;
+}
+
+.Books h1 {
+  font-size: 18px;
+}
+
+.Search input {
+  max-width: 50%;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.listOfBooks {
+  border: 2px solid black;
+  margin-top: 3rem;
+  padding: 8px;
+}
+
+.book-div img {
+  width: 100px;
+}
+
+.listaLibros {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}

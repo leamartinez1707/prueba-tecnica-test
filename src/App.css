@@ -22,6 +22,11 @@
   font-size: 18px;
 }
 
+.selectFilter {
+  width: 20%;
+  text-align: left;
+}
+
 .Search input {
   max-width: 50%;
   justify-content: center;
@@ -41,6 +46,18 @@
 .listaLibros {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 2rem;
+}
+
+.listaLibros:hover {
+  cursor: pointer;
+}
+
+.div-titles {
+  display: flex;
+  flex-direction: column;
+  justify-items: start;
+  text-align: left;
+  border: double 1px black;
+  padding: 5rem;
 }

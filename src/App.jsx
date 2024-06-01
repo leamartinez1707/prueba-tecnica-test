@@ -1,6 +1,8 @@
 import { useState, useMemo, useEffect } from 'react'
-import './App.css'
 import { library } from '../books.json'
+import genres from './data/categories.js'
+import './App.css'
+
 
 function App() {
   const [books, setBooks] = useState(window.localStorage.getItem('books') ? JSON.parse(window.localStorage.getItem('books')) : library)
@@ -31,47 +33,57 @@ function App() {
     <main>
       <section className='Search'>
         <h1>Bienvenidos a la libreria</h1>
-        <h2>Busque el libro según su categoría preferida</h2>
-        <select
-          onChange={(e) => setSearch(e.target.value)}
-          name="select" id="select" defaultValue={''}>
-          <option value="">Todos</option>
-          {books.map((books) => (
-            <option key={books.book.ISBN} value={books.book.genre}>{books.book.genre}</option>
-          ))}
-        </select>
-      </section>
 
-      <section className='Books'>
-        <div className="listaLibros">
-          {list.length === 0 && <h2>No hay libros en la lista de lectura</h2>}
-          <h3>Libros disponibles: {disponibleBooks}</h3>
-          {books
-            .filter(book => (
-              search === '' ? book :
-                book.book.genre === search))
-            .map((book) => (
-              <div className='book-div' key={book.book.ISBN}>
-                <img onClick={() => handleAddBook(book)} src={book.book.cover} alt="" />
-              </div>
+
+      </section>
+      <div className='div-titles'>
+        {list.length === 0 && <h2>No hay libros en la lista de lectura</h2>}
+        {books.length === 0 && <h2>No hay libros para elegir</h2>}
+        {books.length > 0 && <h3>{disponibleBooks} Libros disponibles</h3>}
+        <h3>{listLength} en la lista de lectura</h3>
+        <div>
+
+
+          <h3>Filtrar por género</h3>
+          <select
+            className='selectFilter'
+            onChange={(e) => setSearch(e.target.value)}
+            name="select" id="select" defaultValue={''}>
+            <option value="">Todos</option>
+            {genres.map((genre) => (
+              <option key={genre.id} value={genre.name}>{genre.name}</option>
             ))}
-          {listLength}
+          </select>
+          <h3>Filtrar por página</h3>
         </div>
+        <section className='Books'>
+          <div className="listaLibros">
 
-        {list.length > 0 &&
-          <aside className='listOfBooks'>
-            <h2>Lista de lectura</h2>
-            <h3>Libros en lista: {listLength}</h3>
-            <div className='listaLibros'>
-              {list && list.map((book) => (
+            {books
+              .filter(book => (
+                search === '' ? book :
+                  book.book.genre === search))
+              .map((book) => (
                 <div className='book-div' key={book.book.ISBN}>
-                  <img onClick={() => handleRemoveBook(book)} src={book.book.cover} alt="Imagen del libro" />
+                  <img onClick={() => handleAddBook(book)} src={book.book.cover} alt="" />
                 </div>
-              ))}</div>
-          </aside>
-        }
-      </section>
+              ))}
+          </div>
 
+          {list.length > 0 &&
+            <aside className='listOfBooks'>
+              <h2>Lista de lectura</h2>
+
+              <div className='listaLibros'>
+                {list && list.map((book) => (
+                  <div className='book-div' key={book.book.ISBN}>
+                    <img onClick={() => handleRemoveBook(book)} src={book.book.cover} alt={book.book.title} />
+                  </div>
+                ))}</div>
+            </aside>
+          }
+        </section>
+      </div>
     </main>
   )
 }
